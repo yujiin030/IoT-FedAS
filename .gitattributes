@@ -1,0 +1,2 @@
+*.tar.gz filter=lfs diff=lfs merge=lfs -text
+dataset/Cifar100/rawdata/train filter=lfs diff=lfs merge=lfs -text
