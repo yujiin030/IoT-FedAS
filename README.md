@@ -1,5 +1,6 @@
 # FedAS: 개인화 연합 학습의 불일치 문제 해결
 ### 사물인터넷 Lab2 논문 구현 수행
+ ⦁ 발표자료: https://github.com/hannah896/FedAS-vs-FedAvg-on-TinyImageNet/blob/main/%5B%EC%82%AC%EB%AC%BC%EC%9D%B8%ED%84%B0%EB%84%B7-%EC%98%A4%ED%9B%84%EB%B0%98%5D_%ED%8C%804_%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B82_%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.pptx
 
 
 ------------------------------------------------------------------------------------------------------
@@ -21,32 +22,35 @@ Code Implementation and Informations about FedAS
 }
 ```
 ------------------------------------------------------------------------------------------------------
+
 ## 핵심 문제 정의
 ### 1. 클라이언트 내부 불일치 (Intra-client Inconsistency)
-- 개인화 파라미터(Local)와 공유 파라미터(Global) 간 학습 방향이 충돌
-- 중앙에서 받은 전역 모델이 로컬 지식을 덮어쓰는 문제
-→ 개인화 모델의 일반화 능력 저하
+ ⦁ 개인화 파라미터(Local)와 공유 파라미터(Global) 간 학습 방향이 충돌
+ ⦁ 중앙에서 받은 전역 모델이 로컬 지식을 덮어쓰는 문제
+ → 개인화 모델의 일반화 능력 저하
 
 ### 2. 클라이언트 간 불일치 (Inter-client Inconsistency)
-- 데이터가 부족하거나 참여하지 않는 낙오자(Stragglers)
-- 미학습 모델이 집계에 참여 → 전체 수렴 성능 저하
-→ 전체 시스템 성능 하락 및 불안정한 학습
+ ⦁ 데이터가 부족하거나 참여하지 않는 낙오자(Stragglers)
+ ⦁ 미학습 모델이 집계에 참여 → 전체 수렴 성능 저하
+ → 전체 시스템 성능 하락 및 불안정한 학습
+
 
 
 ## 제안 기법: FedAS Framework
 PA(Parameter-Alignment) + CS(Client-Synchronization)
-두 가지 기법을 결합해 불일치 문제를 동시에 해
+두 가지 기법을 결합해 불일치 문제를 동시에 해결함
 
 ### 1. Parameter Alignment (PA)
-- 로컬 파라미터를 전역 파라미터에 정렬(Alignment)
-- 클라이언트 내부 지식의 보존과 공유를 균형 있게 유지
-→ 일관된 데이터 처리 & 로컬 적응력 증가
+ ⦁ 로컬 파라미터를 전역 파라미터에 정렬(Alignment)
+ ⦁ 클라이언트 내부 지식의 보존과 공유를 균형 있게 유지
+ → 일관된 데이터 처리 & 로컬 적응력 증가
 
 ### 2. Client Synchronization (CS)
-- 참여하지 않은 클라이언트 영향을 최소화
-- Fisher Information Matrix(FIM) 기반 중요도 추정
-- 중요도 높은 업데이트에 집계 가중치 부여
-→ 낙오자 문제 해결 → 안정 수렴
+ ⦁ 참여하지 않은 클라이언트 영향을 최소화
+ ⦁ Fisher Information Matrix(FIM) 기반 중요도 추정
+ ⦁ 중요도 높은 업데이트에 집계 가중치 부여
+ → 낙오자 문제 해결 → 안정 수렴
+
 
 
 ## 알고리즘 개요 흐름
@@ -58,6 +62,7 @@ PA(Parameter-Alignment) + CS(Client-Synchronization)
 6. 반복 수행
 
 
+
 ## 실험 환경
 항목	        내용
 데이터셋	    CIFAR-10, CIFAR-100, TinyCIFAR
@@ -66,17 +71,19 @@ PA(Parameter-Alignment) + CS(Client-Synchronization)
 비교 방식    	FedAvg, pFedMe, FedALA, FedProto 등 최신 PFL 기법
 
 
+
 ## 실험 결과
 
 ### CIFAR-100 결과
-- 모든 조건에서 기존 방법 대비 일관된 성능 향상
-- 데이터 이질성 강화 시에도 정확도 우수 유지
-- 13개 실험 조합 중 5개 이상에서 최고 성능 달성
+ ⦁ 모든 조건에서 기존 방법 대비 일관된 성능 향상
+ ⦁ 데이터 이질성 강화 시에도 정확도 우수 유지
+ ⦁ 13개 실험 조합 중 5개 이상에서 최고 성능 달성
 
 ### Ablation Study
 PA 제거:	내부 불일치 증가 → 성능 하락
 CS 제거:	낙오자 영향 확대 → 수렴 저하
 둘 다 유지:	최고 성능
+
 
 
 ## 추가 실험
@@ -85,8 +92,8 @@ FedAS,
 FedAvg,
 FedPer 의 결과물을 담고 있음.
 
-추가 데이터 셋으로 학습했을 때의 FedAS, FedAvg의 Global 환경에서의 결과 비교 실험으로 추가실험 진행
-32*32로 이미지 파일 변형후 실험 진행.
+⦁ 추가 데이터 셋으로 학습했을 때의 FedAS, FedAvg의 Global 환경에서의 결과 비교 실험으로 추가실험 진행
+⦁ 32*32로 이미지 파일 변형후 실험 진행
 
 - 글로벌 환경 및 다양한 데이터셋에서도 안정적 성능 확인
 - FedAvg보다 더 높은 Robustness 확보
