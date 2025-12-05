@@ -1,3 +1,15 @@
+# FedAS-vs-FedAvg-on-TinyImageNet
+사물인터넷 2분반 4팀  FedAS 최종 구현물
+
+FedAS,
+FedAvg,
+FedPer 의 결과물을 담고 있음.
+
+추가 데이터 셋으로 학습했을 때의 FedAS, FedAvg의 Global 환경에서의 결과 비교 실험으로 추가실험 진행.
+
+32*32로 이미지 파일 변형후 실험 진행.
+
+------------------------------------------------------------------------------------------------------
 # [CVPR24] FedAS: Bridging Inconsistency in Personalized Fedearated Learning
 
 > Xiyuan Yang, Wenke Huang, Mang Ye  
@@ -18,8 +30,4 @@ Personalized Federated Learning (PFL) is primarily designed to provide customize
 }
 ```
 
-## Run
-Follow instructions.md to run.
 
-# FedAS-vs-FedAvg-on-TinyImageNet
-사물인터넷 2분반 4팀  FedAS 최종 구현물
