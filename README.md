@@ -13,6 +13,12 @@
 
 Code Implementation and Informations about FedAS
 
+
+
+## Abstract
+Personalized Federated Learning (PFL) is primarily designed to provide customized models for each client to better fit the non-iid distributed client data, which is a inherent challenge in Federated Learning. However, current PFL methods suffer from inconsistencies in both intra-client and inter-client levels: 1) The intra-client inconsistency stems from the asynchronous update strategy for personalized and shared parameters. In PFL, clients update their shared parameters to communicate and learn from others, while keeping personalized parts unchanged, leading to poor coordination between these two components. 2) The Inter-client inconsistency arises from “stragglers” - inactive clients that communicate and train with the server less frequently. This results in their undetrained personalized models and impedes the collaborative training stage for other clients. In this paper, we present a novel PFL framework named FedAS, which uses Federated Parameter-Alignment and Client-Synchronization to overcome above challenges. Initially, we enhance the localization of global parameters by infusing them with local insights. We make the shared parts learn from previous model, thereby increasing their local relevance and reducing the impact of parameter inconsistency. Furthermore, we design a robust aggregation method to mitigate the impact of stragglers by preventing the incorporation of their under-trained knowledge into aggregated model. Experimental results on Cifar10 and Cifar100 validate the effectiveness of our FedAS in achieving better performance and robustness against data heterogeneity.
+
+
 ## Citation
 ```
 @inproceedings{cvpr24_xiyuan_fedas,
@@ -27,12 +33,16 @@ Code Implementation and Informations about FedAS
 ## 핵심 문제 정의
 ### 1. 클라이언트 내부 불일치 (Intra-client Inconsistency)
  ⦁ 개인화 파라미터(Local)와 공유 파라미터(Global) 간 학습 방향이 충돌
+ 
  ⦁ 중앙에서 받은 전역 모델이 로컬 지식을 덮어쓰는 문제
+ 
  → 개인화 모델의 일반화 능력 저하
 
 ### 2. 클라이언트 간 불일치 (Inter-client Inconsistency)
  ⦁ 데이터가 부족하거나 참여하지 않는 낙오자(Stragglers)
+ 
  ⦁ 미학습 모델이 집계에 참여 → 전체 수렴 성능 저하
+ 
  → 전체 시스템 성능 하락 및 불안정한 학습
 
 
@@ -43,13 +53,18 @@ PA(Parameter-Alignment) + CS(Client-Synchronization)
 
 ### 1. Parameter Alignment (PA)
  ⦁ 로컬 파라미터를 전역 파라미터에 정렬(Alignment)
+ 
  ⦁ 클라이언트 내부 지식의 보존과 공유를 균형 있게 유지
+ 
  → 일관된 데이터 처리 & 로컬 적응력 증가
 
 ### 2. Client Synchronization (CS)
  ⦁ 참여하지 않은 클라이언트 영향을 최소화
+ 
  ⦁ Fisher Information Matrix(FIM) 기반 중요도 추정
+ 
  ⦁ 중요도 높은 업데이트에 집계 가중치 부여
+ 
  → 낙오자 문제 해결 → 안정 수렴
 
 
@@ -77,7 +92,9 @@ PA(Parameter-Alignment) + CS(Client-Synchronization)
 
 ### CIFAR-100 결과
  ⦁ 모든 조건에서 기존 방법 대비 일관된 성능 향상
+ 
  ⦁ 데이터 이질성 강화 시에도 정확도 우수 유지
+ 
  ⦁ 13개 실험 조합 중 5개 이상에서 최고 성능 달성
 
 ### Ablation Study
@@ -94,6 +111,7 @@ FedAvg,
 FedPer 의 결과물을 담고 있음.
 
 ⦁ 추가 데이터 셋으로 학습했을 때의 FedAS, FedAvg의 Global 환경에서의 결과 비교 실험으로 추가실험 진행
+
 ⦁ 32*32로 이미지 파일 변형후 실험 진행
 
 - 글로벌 환경 및 다양한 데이터셋에서도 안정적 성능 확인
